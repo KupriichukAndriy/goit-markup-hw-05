@@ -6,6 +6,10 @@
     --hero-title-color: #ffffff;
     --background-button-color: #f5f4fa;
     --background-social-color: #afb1b8;
+    --label-primary-color: rgba(47, 48, 58, 0.8);
+    --bg-overlay-color: rgba(33, 150, 243, 0.9);
+    --backdrop-color:rgba(0, 0, 0, 0.2);
+    --cubic-animation: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -128,11 +132,15 @@ ul, p, h1, h2, h3, h4, h5, h6 {
 
 
 .header-link {
+    position: relative;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.14;
     letter-spacing: 0.02em;
+    padding-bottom: 32px;
     color: var(--main-text-color);
+    transition: color 250ms var(--cubic-animation),
+    background-color 250ms var(--cubic-animation);
 }
 
 .header-link:hover, 
@@ -142,6 +150,34 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     line-height: 1.14;
     letter-spacing: 0.02em;
     color: var(--accent-color);
+}
+
+.header-link:hover::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--accent-color);
+}
+
+.header-link.current {
+    color: var(--accent-color)
+}
+
+.header-link.current::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--accent-color);
 }
 
 
@@ -156,6 +192,7 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.02em;
     padding: 32px 0;
     color: var(--second-text-color);
+    transition: color 250ms var(--cubic-animation);
 }
 
 .header-address:hover, 
@@ -168,12 +205,15 @@ ul, p, h1, h2, h3, h4, h5, h6 {
 .icon-header {
     fill: currentColor;
     margin-right:10px;
+    transition: fill 250ms var(--cubic-animation);
 }
 
 .icon-header:hover,
 .icon-header:focus {
     fill: var(--accent-color);
 }
+
+
 
 
 /*--------------------MAIN------------------------*/
@@ -226,9 +266,11 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     border: 1px solid transparent;
     border-radius: 4px;
     margin: 0 auto;
+    opacity: 1;
     padding: 10px 24px;
     background-color: var(--accent-color);
     color: var(--hero-title-color);
+    transition: opacity 250ms var(--cubic-animation);
 }
 
 .hero-button:hover, 
@@ -294,6 +336,26 @@ ul, p, h1, h2, h3, h4, h5, h6 {
 .work-list>li:not(:last-child) {
     margin-right: 30px;
 }
+
+.img-box {
+    position: relative;
+}
+
+.label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    width: 100%;
+    font-weight: 700;
+    line-height: 1.14;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--hero-title-color);
+    background-color: var(--label-primary-color);
+}
+
 
 /*-------------TEAM-----------*/
 .team {
@@ -361,7 +423,9 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     align-items: center;
     background-color: var(--hero-title-color);
-    color: var(--background-social-color)
+    color: var(--background-social-color);
+    transition: background-color 250ms var(--cubic-animation),
+    color 250ms var(--cubic-animation);
 }
 
 .team-soc-link:hover {
@@ -400,6 +464,9 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
     color: var(--main-text-color);
     background-color: var(--background-button-color);
+    transition: background-color 250ms var(--cubic-animation),
+    color 250ms var(--cubic-animation),
+    box-shadow 250ms var(--cubic-animation);
 }
 
 .portfolio-filter:hover, 
@@ -420,7 +487,7 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     color: var(--main-text-color);
 }
 
-.examples-list p {
+.examples-text {
     font-size: 16px;
     line-height: 1.88;
     letter-spacing: 0.03em;
@@ -457,6 +524,42 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
+.examples-thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.examples-overlay {
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-overlay-color);
+    opacity: 0;
+    transform: translateY(101%);
+    transition: transform 250ms var(--cubic-animation);
+}
+
+.examples-overlay {
+    opacity: 1;
+}
+
+.examples-items:hover .examples-overlay {
+    transform: translateY(0);
+}
+
+.examples-label {
+    position: absolute;
+    top:0;
+    left:0;
+    padding: 63px 24px 178px 24px;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    color: var(--hero-title-color);
+}
+
 /*-------------PARTNERS-----------*/
 
 .partners-list {
@@ -474,7 +577,10 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     width: 170px;
     height: 92px;
     border-radius: 4px;
-    fill: var(--background-social-color)
+    fill: var(--background-social-color);
+    border-color: var(--background-social-color);
+    transition: fill 250ms var(--cubic-animation),
+    border-color 250ms var(--cubic-animation);
 }
 
 .partners-link:hover,
@@ -523,11 +629,8 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     line-height: 1.71;
     letter-spacing: 0.03em;
     color: var(--hero-title-color);
+    transition: color 250ms var(--cubic-animation);
 }
-
-.contact-items:not(:last-child) {
-    margin-bottom: 12px;
-  }
 
 .footer-address:hover, 
 .footer-address:focus {
@@ -538,12 +641,18 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     color: var(--accent-color);
 }
 
+.contact-items:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+
 .foot-address {
     font-style: normal;    
     font-size: 14px;
     line-height: 1.71;
     letter-spacing: 0.03em;
     color: rgba(255, 255, 255, 0.6);
+    transition: color 250ms var(--cubic-animation);
 }
 
 .foot-address:hover, 
@@ -596,7 +705,8 @@ color: #FFFFFF;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    color: var(--hero-title-color)
+    color: var(--hero-title-color);
+    transition: background-color 250ms var(--cubic-animation);
 }
 
 .social-soc-link:hover {
@@ -607,3 +717,53 @@ color: #FFFFFF;
 .social-soc-icons {
     fill: currentColor;
 }
+
+
+/*-------------MODAL-JS-----------*/
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--backdrop-color);
+    transition: opacity 250ms var(--cubic-animation),
+    visibility 250ms var(--cubic-animation);
+}
+
+.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.modal {
+    position: absolute;
+    width: 528px;
+    min-height: 581px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    background-color: var(--hero-title-color);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    transition: transform 250ms var(--cubic-animation);
+}
+
+ .modal-close {
+    position: absolute;
+    top:8px;
+    right:8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background-color: transparent;
+}
+
