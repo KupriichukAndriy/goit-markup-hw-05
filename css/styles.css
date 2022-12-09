@@ -504,10 +504,10 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     transition: box-shadow 250ms var(--cubic-animation);
 }
 
-.examples-link:hover .examples-overlay {
+.examples-link:hover {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
-    transform: translateY(0);
 }
+
 
 .examples-thumb {
     position: relative;
@@ -526,6 +526,9 @@ ul, p, h1, h2, h3, h4, h5, h6 {
     transition: transform 250ms var(--cubic-animation);
 }
 
+.examples-link:hover .examples-overlay {
+    transform: translateY(0);
+}
 
 .examples-label {
     position: absolute;
